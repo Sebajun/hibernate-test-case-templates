@@ -8,7 +8,9 @@
         <description>Hibernate test case template Persistence Unit</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <class>cern.entity.Point</class>
+        <class>cern.entity.Referential</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>

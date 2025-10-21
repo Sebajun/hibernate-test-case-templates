@@ -1,5 +1,7 @@
 package org.hibernate.bugs;
 
+import cern.entity.Point;
+import jakarta.persistence.Query;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +27,12 @@ class JPAUnitTestCase {
 		entityManagerFactory.close();
 	}
 
-	// Entities are auto-discovered, so just add them anywhere on class-path
-	// Add your tests, using standard JUnit.
 	@Test
-	void hhh123Test() throws Exception {
+	void nativeQueryOnParentClassShouldNotFail() throws Exception {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
-		// Do stuff...
+        Query nativeQuery = entityManager.createNativeQuery("SELECT points_0.*, 0 as clazz_ FROM POINTS points_0", Point.class);
+        nativeQuery.getResultList();
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}
